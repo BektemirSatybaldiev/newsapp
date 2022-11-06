@@ -5,35 +5,36 @@
     <title>Title</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <a href="#" class="navbar-brand">
-        <img src="static/img/dj.jpg" width="30" height="30" alt="logo">
-    </a>
-    <a href="#" class="navbar-brand">
-        <img src="static/img/my_logo.png" width="30" height="30" alt="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a href="#" class="nav-link">Главная</a>
-            </li>
-            <li class="nav-item ">
-                <a href="#" class="nav-link">Контакты</a>
-            </li>
-        </ul>
-        <form action="" class="form-inline my-2 my-lg-0">
-            <input type="text" class="form-control mr-sm-2" placeholder="Поиск" aria-label="Поиск">
-            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Поиск</button>
+    {% extends './base.html' %}
+{% load static %}
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form class="form-signin" method="post" action="{% url 'signin' %}">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 mt-3 font-weight-normal">Пожалуйста укажите логин и пароль</h1>
+            <label for="inputUsername" class="sr-only">Имя пользователя</label>
+            {{ form.username }}
+            <label for="inputPassword" class="sr-only">Пароль</label>
+            {{ form.password }}
+            <button class="btn mt-2 btn-lg btn-primary btn-block" type="submit">Войти</button>
         </form>
-        <a href="#" class="btn btn-outline-light mr-2">Вход</a>
-        <a href="#" class="btn btn-outline-light mr-2">Регистрация</a>
-        <a href="#" class="btn btn-outline-light">Выход</a>
     </div>
-    </nav>
+{% endblock %}
 </body>
 </html>
