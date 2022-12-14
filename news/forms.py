@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-from spa_app.models import Comment
+from news.models import Comment
 
 
 class SigUpForm(forms.Form):

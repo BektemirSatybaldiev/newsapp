@@ -1,11 +1,11 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
-from spaproject import settings
+from newsapp import settings
 from .views import MainView, PostDetailView, SignUpView, SignInView, SuccessView, FeedBackView, SearchView, TagView
 
 urlpatterns = [
     path('', MainView.as_view(), name='index'),
-    path('spa_app/<slug>/', PostDetailView.as_view(), name='post_detail'),
+    path('news/<slug>/', PostDetailView.as_view(), name='post_detail'),
     path('contact/', FeedBackView.as_view(), name='contact'),
     path('search/', SearchView.as_view(), name='search'),
     path('signin/', SignInView.as_view(), name='signin'),
